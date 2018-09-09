@@ -1,0 +1,43 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// Handles global in-game variables.
+/// </summary>
+public class GlobalVariables : MonoBehaviour
+{
+    //TODO do these persist between program instances?
+    public int[] score = { 0, 0 };
+    public bool timed = true;
+    public bool scored = true;
+    public int timeLimit = 5;
+    public int scoreLimit = 10;
+    public bool platforms = true;
+    public bool handicap = false;
+    private bool active = false;
+    public float gameTime;
+
+    void Awake()
+    {
+        if(GameObject.FindGameObjectsWithTag("GLOBAL").Length > 1 && !active)
+        {
+            Destroy(gameObject);
+        }
+        
+        active = true;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
