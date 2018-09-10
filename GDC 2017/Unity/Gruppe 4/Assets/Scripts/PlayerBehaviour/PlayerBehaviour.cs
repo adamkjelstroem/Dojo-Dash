@@ -175,7 +175,7 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         if (mainPlayer)
         {
-            if (inputController.IsPlauer1Charging()) //Check if the charge/dash buttons are being held
+            if (inputController.IsPlayerCharging(1)) //Check if the charge/dash buttons are being held
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
@@ -198,7 +198,7 @@ public class PlayerBehaviour : MonoBehaviour {
         }
         else
         {
-            if (inputController.IsPlauer2Charging()) //Check if the charge/dash buttons are being held
+            if (inputController.IsPlayerCharging(2)) //Check if the charge/dash buttons are being held
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
