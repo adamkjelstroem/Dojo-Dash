@@ -11,15 +11,6 @@ public class PlayerIcon : MonoBehaviour
     public Sprite dead;
     public Image image;
 
-    // Use this for initialization
-    void Start()
-    {}
-
-    // Update is called once per frame
-    void Update()
-    {}
-
-
     /// <summary>
     /// updates the state of the icon
     /// </summary>

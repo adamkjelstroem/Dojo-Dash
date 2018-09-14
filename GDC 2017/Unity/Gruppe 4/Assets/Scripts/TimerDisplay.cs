@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour {
+//handles displaying remaining time on the screen
+public class TimerDisplay : MonoBehaviour {
     public Image[] minutes = new Image[2];
     public Image[] seconds = new Image[2];
     public Image colon;
@@ -24,22 +25,17 @@ public class Timer : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-	    if(!main.globalVariables.timed || main.suddenDeath)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                minutes[i].transform.position = new Vector2(0, -200);
-                seconds[i].transform.position = new Vector2(0, -200);
-            }
-            colon.transform.position = new Vector2(0, -200);
-            
-        }
-        setNumbers();
+        Draw();
 
     }
 	
 	// Update is called once per frame
 	void Update ()
+    {
+        Draw();
+    }
+
+    private void Draw()
     {
         if (!main.globalVariables.timed || main.suddenDeath)
         {
@@ -56,12 +52,12 @@ public class Timer : MonoBehaviour {
         }
         else
         {
-            setNumbers();
+            DisplayValues();
         }
     }
 
 
-    public void setNumbers()
+    public void DisplayValues()
     {
         float timeRemaining = Mathf.Max(main.globalVariables.timeLimit - (Time.time - main.gameStart), 0);
 

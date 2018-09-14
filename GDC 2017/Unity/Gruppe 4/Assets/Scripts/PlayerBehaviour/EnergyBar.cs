@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Displays the amount of energy available to a given player
+/// </summary>
 public class EnergyBar : MonoBehaviour {
 
     public GameObject player;
