@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// fills the charge arrow to indicate how big the charge is
+/// </summary>
 public class FillArrow : MonoBehaviour
 {
     public GameObject player;

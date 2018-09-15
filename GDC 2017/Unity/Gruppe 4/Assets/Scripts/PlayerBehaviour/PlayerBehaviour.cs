@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Handles player behavior
+/// </summary>
 public class PlayerBehaviour : MonoBehaviour {
 
     public bool mainPlayer = false;
@@ -175,7 +178,11 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         if (mainPlayer)
         {
+<<<<<<< HEAD
             if (inputController.IsPlayerCharging(1)) //Check if the charge/dash buttons are being held
+=======
+            if (inputController.IsPlayer1Charging()) //Check if the charge/dash buttons are being held
+>>>>>>> master
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
@@ -198,7 +205,11 @@ public class PlayerBehaviour : MonoBehaviour {
         }
         else
         {
+<<<<<<< HEAD
             if (inputController.IsPlayerCharging(2)) //Check if the charge/dash buttons are being held
+=======
+            if (inputController.IsPlayer2Charging()) //Check if the charge/dash buttons are being held
+>>>>>>> master
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {

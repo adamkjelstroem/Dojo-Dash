@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NoPlatforms : MonoBehaviour {
+//enforces the 'no platforms' setting, if it's used
+public class NoPlatformsEnforcer : MonoBehaviour {
     public GameObject main;
     private Main mainScript;
     // Use this for initialization
