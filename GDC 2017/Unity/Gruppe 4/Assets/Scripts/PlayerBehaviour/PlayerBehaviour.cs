@@ -179,7 +179,6 @@ public class PlayerBehaviour : MonoBehaviour {
         if (mainPlayer)
         {
             if (inputController.IsPlayerCharging(1)) //Check if the charge/dash buttons are being held
-
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
