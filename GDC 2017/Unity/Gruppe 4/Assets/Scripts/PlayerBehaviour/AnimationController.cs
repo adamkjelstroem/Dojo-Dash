@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// Animation controller for a player
-/// </summary>
 public class AnimationController : MonoBehaviour {
-    
+
+    //this is the player animation controller.
+
+
     public PlayerBehaviour player;
     public Animator am;
 

@@ -2,11 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class EnergyBar : MonoBehaviour {
-
+public class MinEnergy : MonoBehaviour {
+    public Image image;
     public GameObject player;
     private PlayerBehaviour playerBehaviour;
-    public Image bar;
 
     void Awake()
     {
@@ -15,11 +14,18 @@ public class EnergyBar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    
+        SetHeight();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        bar.fillAmount = playerBehaviour.energy / playerBehaviour.maxEnergy;
-	}
+        SetHeight();
+    }
+
+    //SPLIT
+
+    public void SetHeight()
+    {
+        image.fillAmount = playerBehaviour.energyCostMin / playerBehaviour.maxEnergy;
+    }
 }
