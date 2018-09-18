@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-//handles 'out of screen marker' for one player
 public class OutOfScreenMarkers : MonoBehaviour {
     public GameObject player;
     public PlayerBehaviour playerScript;
@@ -29,7 +28,6 @@ public class OutOfScreenMarkers : MonoBehaviour {
     public void SetMarker()
     {
         Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(player.transform.position);
-        //if player is outside screen, display the markers
         if ((playerScreenPosition.x > Screen.width || playerScreenPosition.x < 0 || playerScreenPosition.y > Screen.height || playerScreenPosition.y < 0) && playerScript.alive)
         {
             transform.position = new Vector2(Mathf.Max(Mathf.Min(Screen.width - arrowSize, playerScreenPosition.x), arrowSize), Mathf.Max(Mathf.Min(Screen.height - arrowSize, playerScreenPosition.y), arrowSize));
@@ -39,7 +37,6 @@ public class OutOfScreenMarkers : MonoBehaviour {
         }
         else
         {
-            //otherwise move them far outside view
             transform.position = new Vector2(-200, -200);
             icon.transform.position = new Vector2(-200, -200);
         }

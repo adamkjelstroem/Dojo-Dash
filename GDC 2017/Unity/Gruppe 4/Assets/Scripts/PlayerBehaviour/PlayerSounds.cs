@@ -2,9 +2,7 @@
 using UnityEngine.Audio;
 using System.Collections;
 
-/// <summary>
-/// Handles player sounds
-/// </summary>
+
 public class PlayerSounds : MonoBehaviour {
 
     public AudioClip[] dash;
@@ -24,15 +22,18 @@ public class PlayerSounds : MonoBehaviour {
 
     public void HitGround(float velocity)
     {
-        if (velocity <= 1.3f) return; //do not play sound unless speed is higher than that
-        //TODO hardcoded velocity threshold?
+        //volume increases as velocity increases
+//        Debug.Log("hit ground with velocity " + velocity);
+        if (velocity <= 1.3f) return;
+
         audio[1].volume = 1;
         Play(hitGround,1);
     }
 
     public void HitPlayer(float velocity)
     {
-        //TODO always play sound?
+//        Debug.Log("Hit player with velocity " + velocity);
+        //TODO calc volume
         audio[2].volume = 1;
         Play(hitPlayer,2);
     }
@@ -68,4 +69,15 @@ public class PlayerSounds : MonoBehaviour {
         audio[i].clip = sound[Random.Range(0, sound.Length)];
         audio[i].Play();
     }
+    
+    // Use this for initialization
+    void Start ()
+    {
+	    
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 }
