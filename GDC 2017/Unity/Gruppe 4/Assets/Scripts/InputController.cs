@@ -1,11 +1,9 @@
-﻿using System.Collections;
+﻿using Luminosity.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Handles in-game user input (keyboard or controller)
-/// </summary>
 public class InputController : MonoBehaviour {
 
     //joystick movements below this threshold are ignored
@@ -14,43 +12,43 @@ public class InputController : MonoBehaviour {
     /// <summary>
     /// Contains the keys for the controls of a player (and whether it's a bot, a local player or an internet player)
     /// </summary>
-    private class PlayerConfig
-    {
-        public int type; //human=0, bot=1, internet player=2
-        public string
-            joystickChargeDash,
-            chargeDash,
+    //private class PlayerConfig
+    //{
+    //    public int type; //human=0, bot=1, internet player=2
+    //    public string
+    //        joystickChargeDash,
+    //        chargeDash,
 
-            joystickHorizontal,
-            joystickVertical,
-            horizontal,
-            vertical;
+    //        joystickHorizontal,
+    //        joystickVertical,
+    //        horizontal,
+    //        vertical;
 
-        public PlayerConfig(int type,
-            string joystickChargeDash,
-            string chargeDash,
-            string joystickHorizontal,
-            string joystickVertical,
-            string horizontal,
-            string vertical)
-        {
-            this.type = type;
-            this.joystickChargeDash = joystickChargeDash;
-            this.chargeDash = chargeDash;
-            this.joystickHorizontal = joystickHorizontal;
-            this.joystickVertical = joystickVertical;
-            this.horizontal = horizontal;
-            this.vertical = vertical;
-        }
-    }
+    //    public PlayerConfig(int type,
+    //        string joystickChargeDash,
+    //        string chargeDash,
+    //        string joystickHorizontal,
+    //        string joystickVertical,
+    //        string horizontal,
+    //        string vertical)
+    //    {
+    //        this.type = type;
+    //        this.joystickChargeDash = joystickChargeDash;
+    //        this.chargeDash = chargeDash;
+    //        this.joystickHorizontal = joystickHorizontal;
+    //        this.joystickVertical = joystickVertical;
+    //        this.horizontal = horizontal;
+    //        this.vertical = vertical;
+    //    }
+    //}
 
-    private PlayerConfig[] players =
-    {
-        //player 1
-        new PlayerConfig(0,"JoystickChargeDashP1","ChargeDashP1","JoystickHorizontalP1","JoystickVerticalP1","HorizontalP1","VerticalP1"),
-        //player 2
-        new PlayerConfig(0,"JoystickChargeDashP2","ChargeDashP2","JoystickHorizontalP2","JoystickVerticalP2","HorizontalP2","VerticalP2"),
-    };
+    //private PlayerConfig[] players =
+    //{
+    //    //player 1
+    //    new PlayerConfig(0,"JoystickChargeDashP1","ChargeDashP1","JoystickHorizontalP1","JoystickVerticalP1","HorizontalP1","VerticalP1"),
+    //    //player 2
+    //    new PlayerConfig(0,"JoystickChargeDashP2","ChargeDashP2","JoystickHorizontalP2","JoystickVerticalP2","HorizontalP2","VerticalP2"),
+    //};
 
     //=====================================================================
     // Others
@@ -78,17 +76,21 @@ public class InputController : MonoBehaviour {
     /// <returns>whether a given player is charging.</returns>
     public bool IsPlayerCharging(int Player)
     {
-        PlayerConfig p = players[Player - 1];
-        if (Input.GetJoystickNames().Length >= 1)
-        {
-            // We have a controller.
-            return Input.GetButton(p.joystickChargeDash);
-        }
-        else
-        {
-            // We have no controller.
-            return Input.GetAxis(p.chargeDash) == 1;
-        }
+        PlayerID player = Player == 1 ? PlayerID.One : PlayerID.Two;
+
+        return InputManager.GetButton("DashCharge", player);
+
+        //PlayerConfig p = players[Player - 1];
+        //if (Input.GetJoystickNames().Length >= 1)
+        //{
+        //    // We have a controller.
+        //    return Input.GetButton(p.joystickChargeDash);
+        //}
+        //else
+        //{
+        //    // We have no controller.
+        //    return Input.GetAxis(p.chargeDash) == 1;
+        //}
     }
     
     /// <summary>
@@ -98,22 +100,33 @@ public class InputController : MonoBehaviour {
     /// <returns>the direction a given player is aiming in</returns>
     public Vector2 PlayerDir(int Player)
     {
-        PlayerConfig p = players[Player - 1];
-        if (Input.GetJoystickNames().Length >= 1)
-        {
-            // We have a controller.
+        PlayerID player = Player == 1 ? PlayerID.One : PlayerID.Two;
 
-            if (Mathf.Abs(Input.GetAxis(p.joystickHorizontal)) <= joystickSensitivity && Mathf.Abs(Input.GetAxis(p.joystickVertical)) <= joystickSensitivity)
-            {
-                return new Vector2(0, 0); //minor joystick movements are ignored
-            }
+        Vector2 dir = new Vector2(InputManager.GetAxisRaw("Horizontal", player), InputManager.GetAxisRaw("Vertical", player));
 
-            Vector2 dir = new Vector2(Input.GetAxis(p.joystickHorizontal), Input.GetAxis(p.joystickVertical));
-            return dir;
-        }
+        if (dir.x < joystickSensitivity && dir.x > joystickSensitivity)
+            dir.x = 0;
+        if (dir.y < joystickSensitivity && dir.x > joystickSensitivity)
+            dir.y = 0;
 
-        // We have no controller.
-        return new Vector2((int)Mathf.Round(Input.GetAxis(p.horizontal)), (int)Mathf.Round(Input.GetAxis(p.vertical)));
+        return dir;
+
+        //PlayerConfig p = players[Player - 1];
+        //if (Input.GetJoystickNames().Length >= 1)
+        //{
+        //    // We have a controller.
+
+        //    if (Mathf.Abs(Input.GetAxis(p.joystickHorizontal)) <= joystickSensitivity && Mathf.Abs(Input.GetAxis(p.joystickVertical)) <= joystickSensitivity)
+        //    {
+        //        return new Vector2(0, 0); //minor joystick movements are ignored
+        //    }
+
+        //    Vector2 dir = new Vector2(Input.GetAxis(p.joystickHorizontal), Input.GetAxis(p.joystickVertical));
+        //    return dir;
+        //}
+
+        //// We have no controller.
+        //return new Vector2((int)Mathf.Round(Input.GetAxis(p.horizontal)), (int)Mathf.Round(Input.GetAxis(p.vertical)));
     }
 
     //player 1
