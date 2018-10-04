@@ -382,7 +382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d193493b582ba254c94024b6335b0742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeAmount: 0
+  ChargeAmount: 0
+  ChargeRate: 0.5
   Drum1: {fileID: 8300000, guid: 81482748a94a7704d84ee71b24b31da4, type: 3}
   Drum2: {fileID: 8300000, guid: cfc52758984373342ab068d3b4877dcd, type: 3}
   MainDrum: 1
@@ -391,7 +392,7 @@ MonoBehaviour:
   MinimumSpeed: 0.4
   MaximumSpeed: 0.1
   Volume: 1
-  LastDrum: 0
+  TimeSinceLastDrum: 0
   SelfAudioSource: {fileID: 1986228650}
 --- !u!135 &1986228652
 SphereCollider:

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ChargeUp : MonoBehaviour {
 
-    public float chargeAmount;
+    public float ChargeAmount;
+    public float ChargeRate;
 
     //Alle variabler der skal inkluderes
     [Header("Audio Variables")]
@@ -35,19 +36,19 @@ public class ChargeUp : MonoBehaviour {
         {
             if (Input.anyKey)
             {
-                chargeAmount += 1f * Time.deltaTime;
-                if (chargeAmount >= 1f)
+                ChargeAmount += ChargeRate * Time.deltaTime;
+                if (ChargeAmount >= 1f)
                 {
-                    chargeAmount = 1f;
+                    ChargeAmount = 1f;
                 }
             }
             else
             {
-                chargeAmount = 0f;
+                ChargeAmount = 0f;
             }
         }
         //Skal køres hver frame 
-        PlayChargeSound(chargeAmount);
+        PlayChargeSound(ChargeAmount);
 	}
 
 
