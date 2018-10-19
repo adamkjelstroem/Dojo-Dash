@@ -97,8 +97,9 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         if (col.gameObject.CompareTag(gameObject.tag))  //Checks if the other object's tag matches the current tag (is the object another player?)
         {
-            if (mainPlayer)
+            if (mainPlayer) //only does this on one of the players
             {
+                
                 Rigidbody other = col.gameObject.GetComponent<Rigidbody>(); //Stores the collision object's Rigidbody in other
 
                 Vector2 colSpeed = body.velocity - other.velocity;
@@ -111,23 +112,19 @@ public class PlayerBehaviour : MonoBehaviour {
                 if (other.velocity.magnitude < body.velocity.magnitude) //Checks if the current object moves slower than the other object
                 {
                     selfForce = (body.position - other.position).normalized * pushForce * other.velocity.magnitude; //Shoots self away from the other player
-                    if (!main.GetComponent<Main>().suddenDeath)
-                    {
-                        otherForce = (other.position - body.position).normalized * pushForce * body.velocity.magnitude / 2.5f;
-                    }
+
+                    otherForce = (other.position - body.position).normalized * pushForce * body.velocity.magnitude / (main.GetComponent<Main>().suddenDeath ? 10 : 2.5f);
                 }
                 else if (other.velocity.magnitude > body.velocity.magnitude)
                 {
                     otherForce = other.velocity + (other.position - body.position).normalized * pushForce * body.velocity.magnitude; //Shoots self away from the other player
-                    if (!main.GetComponent<Main>().suddenDeath)
-                    {
-                        selfForce = (body.position - other.position).normalized * pushForce * other.velocity.magnitude / 2.5f;
-                    }
-
+                    
+                    selfForce = (body.position - other.position).normalized * pushForce * other.velocity.magnitude / (main.GetComponent<Main>().suddenDeath ? 10 : 2.5f);
                 }
 
                 body.velocity += selfForce;
                 other.velocity += otherForce;
+                
             }
         }
         else
@@ -143,6 +140,7 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+
     public void OnCollisionStay(Collision col) //Runs while in contact with other object
     {
         if (!col.gameObject.CompareTag(gameObject.tag)) //Checks if the tags DO NOT match
@@ -150,7 +148,7 @@ public class PlayerBehaviour : MonoBehaviour {
             switch (col.gameObject.tag)
             {
                 case "Arena":
-                    onGround = true;    //Inform's the game that the player is on the ground
+                    onGround = true;    //Informs the game that the player is on the ground
                     timeOfLastTouch = Time.time;
                     break;
             }
@@ -318,7 +316,7 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         // Spawn smoke.
         Vector3 smokePos = body.transform.position;
-        smokePos.z = -1;
+        smokePos.z = -2;
         GameObject smoke = (GameObject) Instantiate(smokePrefab, smokePos, Quaternion.identity);
         if(mainPlayer)
             smoke.GetComponent<ParticleSystem>().startColor = Color.red;

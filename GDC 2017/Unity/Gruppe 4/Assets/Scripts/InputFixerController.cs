@@ -66,7 +66,7 @@ public class InputFixerController : MonoBehaviour {
         dataPairs[8] = new DataPair("Player 2", "Vertical", false, p2dName);
         dataPairs[9] = new DataPair("Player 2", "DashCharge", true, p2cName);
         
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < dataPairs.Length; i++) {
             DisplayKeyCode(dataPairs[i]);
         }
 
@@ -76,8 +76,7 @@ public class InputFixerController : MonoBehaviour {
 
     public void OnKeyClick(Text text) {
         Debug.Log("Clicked text: " + text.text);
-
-        //TODO display the 'edit field' dialog
+        
         DataPair dp = GetDataPair(text);
         
 
@@ -91,6 +90,10 @@ public class InputFixerController : MonoBehaviour {
             // of seconds the scan will be canceled.
             Timeout = 10
         };
+
+        //TODO 
+        text.color = new Color(0.7f, 0.1f, 0.1f);
+
 
         // You can replace the lambda function with a member function if you want.
         InputManager.StartInputScan(settings, result =>
@@ -107,6 +110,8 @@ public class InputFixerController : MonoBehaviour {
                     //your code here
                     if(dp.positive) inputAction.Bindings[0].Positive = vKey;
                     else inputAction.Bindings[0].Negative = vKey;
+
+                    text.color = new Color(0f, 0f, 0f);
                 }
             }
 
@@ -132,10 +137,12 @@ public class InputFixerController : MonoBehaviour {
 
     void DisplayKeyCode(Text text, KeyCode keyCode) {
         string s = "" + keyCode;
-        if (keyCode.Equals(KeyCode.UpArrow)) s = "^";
-        if (keyCode.Equals(KeyCode.DownArrow)) s = "v";
-        if (keyCode.Equals(KeyCode.LeftArrow)) s = "<-";
-        if (keyCode.Equals(KeyCode.RightArrow)) s = "->";
+        if (keyCode.Equals(KeyCode.UpArrow)) s = "↑";
+        if (keyCode.Equals(KeyCode.DownArrow)) s = "↓";
+        if (keyCode.Equals(KeyCode.LeftArrow)) s = "←";
+        if (keyCode.Equals(KeyCode.RightArrow)) s = "→";
+        if (keyCode.Equals(KeyCode.Space)) s = "__";
+        if (keyCode.Equals(KeyCode.Delete)) s = "del";
         WriteText(text, s);
         DisplayPressedKey(text, keyCode);
     }

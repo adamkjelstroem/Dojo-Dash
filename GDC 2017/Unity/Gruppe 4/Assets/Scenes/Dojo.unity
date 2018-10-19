@@ -2370,7 +2370,7 @@ MonoBehaviour:
   doomed: 0
   sound: {fileID: 969745505}
   inputController: {fileID: 1362549632}
-  smokePrefab: {fileID: 1000014217865216, guid: 46d852a7395cc4d47b2428c1f3e9e6e1,
+  smokePrefab: {fileID: 1137901186854620, guid: 6c36a115a55096348b4bc4623f112eee,
     type: 2}
 --- !u!114 &969745505
 MonoBehaviour:
@@ -3309,7 +3309,7 @@ MonoBehaviour:
   - {fileID: 1056742716}
   globalVariables: {fileID: 0}
   gameStart: 0
-  suddenDeath: 0
+  suddenDeath: 1
 --- !u!4 &1096389828
 Transform:
   m_ObjectHideFlags: 0
@@ -5572,7 +5572,7 @@ MonoBehaviour:
   doomed: 0
   sound: {fileID: 1748251907}
   inputController: {fileID: 1362549632}
-  smokePrefab: {fileID: 1000014217865216, guid: 46d852a7395cc4d47b2428c1f3e9e6e1,
+  smokePrefab: {fileID: 1137901186854620, guid: 6c36a115a55096348b4bc4623f112eee,
     type: 2}
 --- !u!114 &1748251907
 MonoBehaviour:
