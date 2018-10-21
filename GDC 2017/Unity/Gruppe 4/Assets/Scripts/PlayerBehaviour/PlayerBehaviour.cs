@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class PlayerBehaviour : MonoBehaviour {
 
@@ -44,7 +45,15 @@ public class PlayerBehaviour : MonoBehaviour {
     public GameObject smokePrefab;
     public ParticleSystem chargeEffect;
 
-    
+
+
+    //color start
+    [Space(20)]
+    public Color spawnColor;
+    //color end
+
+
+
     void Awake ()
     {
         maxEnergy = baseMaxEnergy;
@@ -348,10 +357,7 @@ public class PlayerBehaviour : MonoBehaviour {
         smokePos.z = -2;
         GameObject smoke = (GameObject) Instantiate(smokePrefab, smokePos, Quaternion.identity);
         var main = smoke.GetComponent<ParticleSystem>().main;
-        if (mainPlayer)
-            main.startColor = Color.red;
-        else
-            main.startColor = Color.blue;
+        main.startColor = spawnColor;
 
         body.velocity = new Vector3(0, 0, 0);   //Sets the current speed to be 0
         body.angularVelocity = new Vector3(0, 0, 0);    //Stops the current rotation

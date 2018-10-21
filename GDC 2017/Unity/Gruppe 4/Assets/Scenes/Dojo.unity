@@ -2446,6 +2446,7 @@ MonoBehaviour:
   smokePrefab: {fileID: 1137901186854620, guid: 6c36a115a55096348b4bc4623f112eee,
     type: 2}
   chargeEffect: {fileID: 1691788724}
+  spawnColor: {r: 0.78431374, g: 0.47058824, b: 0.47058824, a: 0}
 --- !u!114 &969745505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5723,6 +5724,7 @@ MonoBehaviour:
   smokePrefab: {fileID: 1137901186854620, guid: 6c36a115a55096348b4bc4623f112eee,
     type: 2}
   chargeEffect: {fileID: 538385341}
+  spawnColor: {r: 0, g: 0.47058824, b: 0.78431374, a: 0}
 --- !u!114 &1748251907
 MonoBehaviour:
   m_ObjectHideFlags: 0
