@@ -4208,8 +4208,8 @@ MonoBehaviour:
   score: 0000000000000000
   timed: 1
   scored: 1
-  timeLimit: 300
-  scoreLimit: 1
+  timeLimit: 180
+  scoreLimit: 10
   platforms: 1
   handicap: 0
   gameTime: 0

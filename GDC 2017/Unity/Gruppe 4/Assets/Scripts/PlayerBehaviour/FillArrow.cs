@@ -19,9 +19,7 @@ public class FillArrow : MonoBehaviour
         //show the player charge arrow
         if (playerBehaviour.charging && playerBehaviour.chargeDir >= 0)
         {
-            arrow.fillAmount = Mathf.Min(Time.time - playerBehaviour.chargeStart, 
-                playerBehaviour.chargeMax, CalculateMaxCharge())
-                / playerBehaviour.chargeMax;
+            arrow.fillAmount = playerBehaviour.GetChargeFraction();
         }
         else
         {
@@ -30,8 +28,4 @@ public class FillArrow : MonoBehaviour
         }
     }
 
-    public float CalculateMaxCharge()
-    {
-        return ((playerBehaviour.energy - playerBehaviour.energyCostMin) / playerBehaviour.energyCostRate);
-    }
 }

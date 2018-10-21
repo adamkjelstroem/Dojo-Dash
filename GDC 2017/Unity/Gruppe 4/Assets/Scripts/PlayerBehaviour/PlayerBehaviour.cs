@@ -40,8 +40,9 @@ public class PlayerBehaviour : MonoBehaviour {
     [Space(20)]
     public PlayerSounds sound;
     public InputController inputController;
-
+    [Space(20)]
     public GameObject smokePrefab;
+    public ParticleSystem chargeEffect;
 
     
     void Awake ()
@@ -59,8 +60,9 @@ public class PlayerBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        
-	}
+
+        SetChargeEffectIntensity(0);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -71,6 +73,7 @@ public class PlayerBehaviour : MonoBehaviour {
             RegenerateEnergy();
             CheckIfDoomed();
         }
+        chargeEffect.transform.position = transform.position;
     }
 
     void FixedUpdate()  //Runs 50 times per second
@@ -181,8 +184,12 @@ public class PlayerBehaviour : MonoBehaviour {
                     chargeStart = Time.time;    //Set the start time of the charge
                     charging = true;    //Inform the system that the charge has started
 
+                    SetChargeEffectIntensity(0);
+
                 }
                 chargeDir = SetChargeDirection(inputController.Player1Dir());
+
+                SetChargeEffectIntensity(GetChargeFraction());
             }
             else
             {
@@ -204,8 +211,12 @@ public class PlayerBehaviour : MonoBehaviour {
                     chargeStart = Time.time;    //Set the start time of the charge
                     charging = true;    //Inform the system that the charge has started
 
+
+                    SetChargeEffectIntensity(0);
+
                 }
                 chargeDir = SetChargeDirection(inputController.Player2Dir());
+                SetChargeEffectIntensity(GetChargeFraction());
             }
             else
             {
@@ -219,6 +230,22 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+    //returns a value between 0 and 1 determining how much has been charged as a fraction of max charge.
+    public float GetChargeFraction() {
+        return Mathf.Min(Time.time - chargeStart, chargeMax, CalculateMaxCharge()) / chargeMax;
+    }
+    
+    public float CalculateMaxCharge()
+    {
+        return ((energy - energyCostMin) / energyCostRate);
+    }
+
+
+    private void SetChargeEffectIntensity(float rate) //number must be between 0 and 1
+    {
+        var emission = chargeEffect.emission;
+        emission.rateOverTime = rate * 10;
+    }
     
     public void CheckIfDoomed() //Checks if doomed, whatever that means
     {
@@ -245,6 +272,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public void Dash() //Dashes the player in direction chargeDir
     {
         sound.CancelDashCharge();
+        SetChargeEffectIntensity(0);
         if (energy >= energyCostMin && chargeDir >= 0)
         {
             sound.Dash();
@@ -278,6 +306,7 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         charging = false;
         sound.CancelDashCharge();
+        SetChargeEffectIntensity(0);
     }
 
     public bool KOCheck()   //Checks if the player is KO'd
@@ -318,10 +347,11 @@ public class PlayerBehaviour : MonoBehaviour {
         Vector3 smokePos = body.transform.position;
         smokePos.z = -2;
         GameObject smoke = (GameObject) Instantiate(smokePrefab, smokePos, Quaternion.identity);
-        if(mainPlayer)
-            smoke.GetComponent<ParticleSystem>().startColor = Color.red;
+        var main = smoke.GetComponent<ParticleSystem>().main;
+        if (mainPlayer)
+            main.startColor = Color.red;
         else
-            smoke.GetComponent<ParticleSystem>().startColor = Color.blue;
+            main.startColor = Color.blue;
 
         body.velocity = new Vector3(0, 0, 0);   //Sets the current speed to be 0
         body.angularVelocity = new Vector3(0, 0, 0);    //Stops the current rotation
