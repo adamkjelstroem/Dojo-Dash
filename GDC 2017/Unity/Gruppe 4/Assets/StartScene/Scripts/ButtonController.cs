@@ -11,7 +11,6 @@ public class ButtonController : MonoBehaviour
     public GameObject Options;
     public GameObject Credits;
     public GameObject ExtraCredits;
-    public GameObject InputFixer;
 
     [Header("Options")]
     public Slider sScore;
@@ -58,7 +57,6 @@ public class ButtonController : MonoBehaviour
     public void BBack() {
         Options.SetActive(false);
         Credits.SetActive(false);
-        InputFixer.SetActive(false);
     }
     public void BBackExtra() {
         ExtraCredits.SetActive(false);
