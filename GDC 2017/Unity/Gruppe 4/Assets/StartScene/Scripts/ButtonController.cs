@@ -35,7 +35,6 @@ public class ButtonController : MonoBehaviour
 
     public void BStart()
     {
-        // TODO: INSERT SOMETHING HERE MY FRIEND
         SceneManager.LoadScene("Dojo");
     }
     public void BOptions()

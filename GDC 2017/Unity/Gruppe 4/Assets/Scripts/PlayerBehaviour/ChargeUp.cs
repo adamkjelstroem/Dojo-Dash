@@ -2,33 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargeUp : MonoBehaviour {
+public class ChargeUp : MonoBehaviour
+{
 
     float ChargeAmount;
     float ChargeRate;
+    bool MainDrum = true;
 
     //Alle variabler der skal inkluderes
     [Header("Audio Variables")]
     public AudioClip Drum1;
     public AudioClip Drum2;
-    public bool MainDrum = true;
+    [Space(20)]
     public float MinimumPitch = 1;
     public float MaximumPitch = 1.2f;
+    [Space(20)]
     public float MinimumSpeed = 0.5f;
     public float MaximumSpeed = 0.1f;
+    [Space(20)]
     public float Volume = 1;
-    public float TimeSinceLastDrum = 0;
+    float TimeSinceLastDrum = 0;
+    [Space(20)]
     public AudioSource SelfAudioSource;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         //Finder eget AudioSource component
         SelfAudioSource = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (true) return;
         //debug code
         //Tryk en knap ned for at forøge ChargeAmount, nulstiller når der bliver sluppet igen
         //Space kan trykkes for at standse forøgelsen men blive på samme ChargeAmount
@@ -49,7 +56,7 @@ public class ChargeUp : MonoBehaviour {
         }
         //Skal køres hver frame 
         PlayChargeSound(ChargeAmount);
-	}
+    }
 
 
 
@@ -60,7 +67,7 @@ public class ChargeUp : MonoBehaviour {
         if (chargeAmount > 0)
         {
             //Timing til hvornår næste lyd skal spilles.  mathf.lerp(min,max,procent) retunere en værdi mellem min og max i forhold til procent
-            if (Time.time - TimeSinceLastDrum > Mathf.Lerp(MinimumSpeed,MaximumSpeed,chargeAmount))
+            if (Time.time - TimeSinceLastDrum > Mathf.Lerp(MinimumSpeed, MaximumSpeed, chargeAmount))
             {
 
                 //Bestemmer hvilken lyd der skal spilles

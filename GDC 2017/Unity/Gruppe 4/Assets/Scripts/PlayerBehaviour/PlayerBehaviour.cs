@@ -41,16 +41,12 @@ public class PlayerBehaviour : MonoBehaviour {
     [Space(20)]
     public PlayerSounds sound;
     public InputController inputController;
+    public ChargeUp chargeUpSoundManager;
     [Space(20)]
-    public GameObject smokePrefab;
+    public GameObject smokeBombEffect;
     public ParticleSystem chargeEffect;
-
-
-
-    //color start
     [Space(20)]
     public Color spawnColor;
-    //color end
 
 
 
@@ -82,7 +78,7 @@ public class PlayerBehaviour : MonoBehaviour {
             RegenerateEnergy();
             CheckIfDoomed();
         }
-        chargeEffect.transform.position = transform.position;
+        //chargeEffect.transform.position = transform.position;
     }
 
     void FixedUpdate()  //Runs 50 times per second
@@ -189,7 +185,6 @@ public class PlayerBehaviour : MonoBehaviour {
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
-                    sound.ChargeDash();
                     chargeStart = Time.time;    //Set the start time of the charge
                     charging = true;    //Inform the system that the charge has started
 
@@ -216,7 +211,6 @@ public class PlayerBehaviour : MonoBehaviour {
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
-                    sound.ChargeDash();
                     chargeStart = Time.time;    //Set the start time of the charge
                     charging = true;    //Inform the system that the charge has started
 
@@ -253,7 +247,10 @@ public class PlayerBehaviour : MonoBehaviour {
     private void SetChargeEffectIntensity(float rate) //number must be between 0 and 1
     {
         var emission = chargeEffect.emission;
-        emission.rateOverTime = rate * 10;
+        emission.rateOverTime = rate * 20;
+        var main = chargeEffect.main;
+        main.startSpeed = 5f + 3f*rate;
+        chargeUpSoundManager.PlayChargeSound(rate);
     }
     
     public void CheckIfDoomed() //Checks if doomed, whatever that means
@@ -280,7 +277,6 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void Dash() //Dashes the player in direction chargeDir
     {
-        sound.CancelDashCharge();
         SetChargeEffectIntensity(0);
         if (energy >= energyCostMin && chargeDir >= 0)
         {
@@ -314,7 +310,6 @@ public class PlayerBehaviour : MonoBehaviour {
     public void CancelCharge() //Cancels charge
     {
         charging = false;
-        sound.CancelDashCharge();
         SetChargeEffectIntensity(0);
     }
 
@@ -353,12 +348,19 @@ public class PlayerBehaviour : MonoBehaviour {
     public void Respawn() //respawn a player
     {
         // Spawn smoke.
+        ParticleSystem ps = smokeBombEffect.GetComponent<ParticleSystem>();
+
+        var main = ps.main;
+        main.startColor = spawnColor;
+
+        ps.Play();
+        /*
         Vector3 smokePos = body.transform.position;
         smokePos.z = -2;
         GameObject smoke = (GameObject) Instantiate(smokePrefab, smokePos, Quaternion.identity);
         var main = smoke.GetComponent<ParticleSystem>().main;
         main.startColor = spawnColor;
-
+        */
         body.velocity = new Vector3(0, 0, 0);   //Sets the current speed to be 0
         body.angularVelocity = new Vector3(0, 0, 0);    //Stops the current rotation
         energy = maxEnergy;
