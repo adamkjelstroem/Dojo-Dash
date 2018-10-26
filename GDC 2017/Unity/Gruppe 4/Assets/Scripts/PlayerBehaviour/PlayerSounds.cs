@@ -38,17 +38,6 @@ public class PlayerSounds : MonoBehaviour {
         Play(hitPlayer,2);
     }
 
-    public void ChargeDash()
-    {
-        audio[3].volume = 0.21f;
-        Play(dashCharge, 3);
-    }
-
-    public void CancelDashCharge()
-    {
-        audio[3].Stop();
-    }
-
     public void DeathSound()
     {
         audio[4].volume = 0.7f;

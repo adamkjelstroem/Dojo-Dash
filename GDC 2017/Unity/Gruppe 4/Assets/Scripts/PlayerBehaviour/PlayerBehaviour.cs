@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class PlayerBehaviour : MonoBehaviour {
 
@@ -40,10 +41,15 @@ public class PlayerBehaviour : MonoBehaviour {
     [Space(20)]
     public PlayerSounds sound;
     public InputController inputController;
+    public ChargeUp chargeUpSoundManager;
+    [Space(20)]
+    public GameObject smokeBombEffect;
+    public ParticleSystem chargeEffect;
+    [Space(20)]
+    public Color spawnColor;
 
-    public GameObject smokePrefab;
 
-    
+
     void Awake ()
     {
         maxEnergy = baseMaxEnergy;
@@ -59,8 +65,9 @@ public class PlayerBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        
-	}
+
+        SetChargeEffectIntensity(0);
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -71,6 +78,7 @@ public class PlayerBehaviour : MonoBehaviour {
             RegenerateEnergy();
             CheckIfDoomed();
         }
+        //chargeEffect.transform.position = transform.position;
     }
 
     void FixedUpdate()  //Runs 50 times per second
@@ -97,8 +105,9 @@ public class PlayerBehaviour : MonoBehaviour {
     {
         if (col.gameObject.CompareTag(gameObject.tag))  //Checks if the other object's tag matches the current tag (is the object another player?)
         {
-            if (mainPlayer)
+            if (mainPlayer) //only does this on one of the players
             {
+                
                 Rigidbody other = col.gameObject.GetComponent<Rigidbody>(); //Stores the collision object's Rigidbody in other
 
                 Vector2 colSpeed = body.velocity - other.velocity;
@@ -111,23 +120,19 @@ public class PlayerBehaviour : MonoBehaviour {
                 if (other.velocity.magnitude < body.velocity.magnitude) //Checks if the current object moves slower than the other object
                 {
                     selfForce = (body.position - other.position).normalized * pushForce * other.velocity.magnitude; //Shoots self away from the other player
-                    if (!main.GetComponent<Main>().suddenDeath)
-                    {
-                        otherForce = (other.position - body.position).normalized * pushForce * body.velocity.magnitude / 2.5f;
-                    }
+
+                    otherForce = (other.position - body.position).normalized * pushForce * body.velocity.magnitude / (main.GetComponent<Main>().suddenDeath ? 10 : 2.5f);
                 }
                 else if (other.velocity.magnitude > body.velocity.magnitude)
                 {
                     otherForce = other.velocity + (other.position - body.position).normalized * pushForce * body.velocity.magnitude; //Shoots self away from the other player
-                    if (!main.GetComponent<Main>().suddenDeath)
-                    {
-                        selfForce = (body.position - other.position).normalized * pushForce * other.velocity.magnitude / 2.5f;
-                    }
-
+                    
+                    selfForce = (body.position - other.position).normalized * pushForce * other.velocity.magnitude / (main.GetComponent<Main>().suddenDeath ? 10 : 2.5f);
                 }
 
                 body.velocity += selfForce;
                 other.velocity += otherForce;
+                
             }
         }
         else
@@ -143,6 +148,7 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+
     public void OnCollisionStay(Collision col) //Runs while in contact with other object
     {
         if (!col.gameObject.CompareTag(gameObject.tag)) //Checks if the tags DO NOT match
@@ -150,7 +156,7 @@ public class PlayerBehaviour : MonoBehaviour {
             switch (col.gameObject.tag)
             {
                 case "Arena":
-                    onGround = true;    //Inform's the game that the player is on the ground
+                    onGround = true;    //Informs the game that the player is on the ground
                     timeOfLastTouch = Time.time;
                     break;
             }
@@ -179,12 +185,15 @@ public class PlayerBehaviour : MonoBehaviour {
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
-                    sound.ChargeDash();
                     chargeStart = Time.time;    //Set the start time of the charge
                     charging = true;    //Inform the system that the charge has started
 
+                    SetChargeEffectIntensity(0);
+
                 }
                 chargeDir = SetChargeDirection(inputController.Player1Dir());
+
+                SetChargeEffectIntensity(GetChargeFraction());
             }
             else
             {
@@ -202,12 +211,15 @@ public class PlayerBehaviour : MonoBehaviour {
             {
                 if (!charging && energy >= energyCostMin)  //Check if already charging
                 {
-                    sound.ChargeDash();
                     chargeStart = Time.time;    //Set the start time of the charge
                     charging = true;    //Inform the system that the charge has started
 
+
+                    SetChargeEffectIntensity(0);
+
                 }
                 chargeDir = SetChargeDirection(inputController.Player2Dir());
+                SetChargeEffectIntensity(GetChargeFraction());
             }
             else
             {
@@ -221,6 +233,25 @@ public class PlayerBehaviour : MonoBehaviour {
         }
     }
 
+    //returns a value between 0 and 1 determining how much has been charged as a fraction of max charge.
+    public float GetChargeFraction() {
+        return Mathf.Min(Time.time - chargeStart, chargeMax, CalculateMaxCharge()) / chargeMax;
+    }
+    
+    public float CalculateMaxCharge()
+    {
+        return ((energy - energyCostMin) / energyCostRate);
+    }
+
+
+    private void SetChargeEffectIntensity(float rate) //number must be between 0 and 1
+    {
+        var emission = chargeEffect.emission;
+        emission.rateOverTime = rate * 20;
+        var main = chargeEffect.main;
+        main.startSpeed = 5f + 3f*rate;
+        chargeUpSoundManager.PlayChargeSound(rate);
+    }
     
     public void CheckIfDoomed() //Checks if doomed, whatever that means
     {
@@ -246,7 +277,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void Dash() //Dashes the player in direction chargeDir
     {
-        sound.CancelDashCharge();
+        SetChargeEffectIntensity(0);
         if (energy >= energyCostMin && chargeDir >= 0)
         {
             sound.Dash();
@@ -279,7 +310,7 @@ public class PlayerBehaviour : MonoBehaviour {
     public void CancelCharge() //Cancels charge
     {
         charging = false;
-        sound.CancelDashCharge();
+        SetChargeEffectIntensity(0);
     }
 
     public bool KOCheck()   //Checks if the player is KO'd
@@ -317,14 +348,19 @@ public class PlayerBehaviour : MonoBehaviour {
     public void Respawn() //respawn a player
     {
         // Spawn smoke.
-        Vector3 smokePos = body.transform.position;
-        smokePos.z = -1;
-        GameObject smoke = (GameObject) Instantiate(smokePrefab, smokePos, Quaternion.identity);
-        if(mainPlayer)
-            smoke.GetComponent<ParticleSystem>().startColor = Color.red;
-        else
-            smoke.GetComponent<ParticleSystem>().startColor = Color.blue;
+        ParticleSystem ps = smokeBombEffect.GetComponent<ParticleSystem>();
 
+        var main = ps.main;
+        main.startColor = spawnColor;
+
+        ps.Play();
+        /*
+        Vector3 smokePos = body.transform.position;
+        smokePos.z = -2;
+        GameObject smoke = (GameObject) Instantiate(smokePrefab, smokePos, Quaternion.identity);
+        var main = smoke.GetComponent<ParticleSystem>().main;
+        main.startColor = spawnColor;
+        */
         body.velocity = new Vector3(0, 0, 0);   //Sets the current speed to be 0
         body.angularVelocity = new Vector3(0, 0, 0);    //Stops the current rotation
         energy = maxEnergy;
