@@ -71,6 +71,7 @@ public class InputFixerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(InputManager.GetButton("DashCharge"));
 
         //extract all key bindings
         dataPairs[0] = new DataPair("Player 1", "Horizontal", true, p1rName);
