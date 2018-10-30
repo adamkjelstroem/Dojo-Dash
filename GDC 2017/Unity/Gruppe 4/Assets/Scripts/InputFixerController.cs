@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class InputFixerController : MonoBehaviour {
 
-    [Header("Player 1")]
+    public Color ChangeKeyColor;
+
+    [Header("Player 1 Keyboard")]
     public Text p1lName;
     public Text p1rName;
     public Text p1uName;
@@ -14,7 +16,7 @@ public class InputFixerController : MonoBehaviour {
     public Text p1cName;
 
     
-    [Header("Player 2")]
+    [Header("Player 2 Keyboard")]
     public Text p2lName;
     public Text p2rName;
     public Text p2uName;
@@ -23,6 +25,8 @@ public class InputFixerController : MonoBehaviour {
 
 
     private DataPair[] dataPairs = new DataPair[10];
+
+    private Dictionary<Text, Outline> TextToOutlineMap = new Dictionary<Text, Outline>();
 
     class DataPair
     {
@@ -47,8 +51,23 @@ public class InputFixerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        dataPairs[0] = new DataPair("Player 1", "Horizontal", true, p1rName);
+        dataPairs[1] = new DataPair("Player 1", "Horizontal", false, p1lName);
+        dataPairs[2] = new DataPair("Player 1", "Vertical", true, p1uName);
+        dataPairs[3] = new DataPair("Player 1", "Vertical", false, p1dName);
+        dataPairs[4] = new DataPair("Player 1", "DashCharge", true, p1cName);
+
+        dataPairs[5] = new DataPair("Player 2", "Horizontal", true, p2rName);
+        dataPairs[6] = new DataPair("Player 2", "Horizontal", false, p2lName);
+        dataPairs[7] = new DataPair("Player 2", "Vertical", true, p2uName);
+        dataPairs[8] = new DataPair("Player 2", "Vertical", false, p2dName);
+        dataPairs[9] = new DataPair("Player 2", "DashCharge", true, p2cName);
+
+        for (int i = 0; i < dataPairs.Length; i++)
+        {
+            TextToOutlineMap.Add(dataPairs[i].text, dataPairs[i].text.GetComponent<Outline>());
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -70,8 +89,6 @@ public class InputFixerController : MonoBehaviour {
             DisplayKeyCode(dataPairs[i]);
         }
 
-
-
     }
 
     public void OnKeyClick(Text text) {
@@ -92,7 +109,7 @@ public class InputFixerController : MonoBehaviour {
         };
 
         //TODO 
-        text.color = new Color(0.7f, 0.1f, 0.1f);
+        text.color = ChangeKeyColor;
 
 
         // You can replace the lambda function with a member function if you want.
@@ -149,9 +166,9 @@ public class InputFixerController : MonoBehaviour {
 
     void DisplayPressedKey(Text text, KeyCode keyCode)
     {
-        text.fontStyle = InputManager.GetKey(keyCode) ? FontStyle.Bold : FontStyle.Normal;
+        TextToOutlineMap[text].enabled = InputManager.GetKey(keyCode);
+        //text.fontStyle = InputManager.GetKey(keyCode) ? FontStyle.Bold : FontStyle.Normal;
     }
-
 
     void WriteText(Text text, string s)
     {

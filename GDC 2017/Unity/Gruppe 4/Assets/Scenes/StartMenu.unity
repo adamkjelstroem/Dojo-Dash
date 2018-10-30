@@ -632,6 +632,7 @@ GameObject:
   - component: {fileID: 150929075}
   - component: {fileID: 150929074}
   - component: {fileID: 150929076}
+  - component: {fileID: 150929077}
   m_Layer: 5
   m_Name: p1U
   m_TagString: Untagged
@@ -727,6 +728,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &150929077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 150929072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &182902559
 Prefab:
   m_ObjectHideFlags: 0
@@ -884,6 +899,7 @@ GameObject:
   - component: {fileID: 206390101}
   - component: {fileID: 206390103}
   - component: {fileID: 206390104}
+  - component: {fileID: 206390105}
   m_Layer: 5
   m_Name: p1Charge
   m_TagString: Untagged
@@ -1014,6 +1030,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &206390105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 206390099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &313057901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1516,7 @@ GameObject:
   - component: {fileID: 443233291}
   - component: {fileID: 443233290}
   - component: {fileID: 443233292}
+  - component: {fileID: 443233293}
   m_Layer: 5
   m_Name: p2R
   m_TagString: Untagged
@@ -1581,6 +1612,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &443233293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443233288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &464700688
 Prefab:
   m_ObjectHideFlags: 0
@@ -2783,6 +2828,7 @@ GameObject:
   - component: {fileID: 846556130}
   - component: {fileID: 846556129}
   - component: {fileID: 846556131}
+  - component: {fileID: 846556132}
   m_Layer: 5
   m_Name: p1R
   m_TagString: Untagged
@@ -2878,6 +2924,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &846556132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 846556127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!4 &861251132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 61080e37caef9644faeb6cd2a900e6ee,
@@ -2894,6 +2954,7 @@ GameObject:
   - component: {fileID: 886000991}
   - component: {fileID: 886000990}
   - component: {fileID: 886000992}
+  - component: {fileID: 886000993}
   m_Layer: 5
   m_Name: p1L
   m_TagString: Untagged
@@ -2989,6 +3050,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &886000993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 886000988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &916970571
 Prefab:
   m_ObjectHideFlags: 0
@@ -3256,6 +3331,7 @@ GameObject:
   - component: {fileID: 1076397028}
   - component: {fileID: 1076397027}
   - component: {fileID: 1076397029}
+  - component: {fileID: 1076397030}
   m_Layer: 5
   m_Name: P2D
   m_TagString: Untagged
@@ -3351,6 +3427,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1076397030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076397025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!224 &1085235171 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224000010627258966, guid: 9e59d231c411dc3488231c5b3e433fb5,
@@ -3470,6 +3560,19 @@ MonoBehaviour:
         m_gamepadButton: 0
         m_gamepadAxis: 0
         m_gamepadIndex: 0
+      - m_positive: 0
+        m_negative: 0
+        m_deadZone: 0
+        m_gravity: 1
+        m_sensitivity: 1
+        m_snap: 0
+        m_invert: 0
+        m_type: 6
+        m_axis: 0
+        m_joystick: 0
+        m_gamepadButton: 0
+        m_gamepadAxis: 0
+        m_gamepadIndex: 0
     - m_name: Vertical
       m_description: 
       m_bindings:
@@ -3486,6 +3589,19 @@ MonoBehaviour:
         m_gamepadButton: 0
         m_gamepadAxis: 0
         m_gamepadIndex: 0
+      - m_positive: 0
+        m_negative: 0
+        m_deadZone: 0
+        m_gravity: 1
+        m_sensitivity: 1
+        m_snap: 0
+        m_invert: 0
+        m_type: 6
+        m_axis: 1
+        m_joystick: 0
+        m_gamepadButton: 0
+        m_gamepadAxis: 0
+        m_gamepadIndex: 0
     - m_name: DashCharge
       m_description: 
       m_bindings:
@@ -3498,6 +3614,19 @@ MonoBehaviour:
         m_invert: 0
         m_type: 0
         m_axis: 0
+        m_joystick: 0
+        m_gamepadButton: 0
+        m_gamepadAxis: 0
+        m_gamepadIndex: 0
+      - m_positive: 0
+        m_negative: 0
+        m_deadZone: 0
+        m_gravity: 1
+        m_sensitivity: 1
+        m_snap: 0
+        m_invert: 0
+        m_type: 5
+        m_axis: 2
         m_joystick: 0
         m_gamepadButton: 0
         m_gamepadAxis: 0
@@ -3729,6 +3858,7 @@ GameObject:
   - component: {fileID: 1189060040}
   - component: {fileID: 1189060039}
   - component: {fileID: 1189060041}
+  - component: {fileID: 1189060042}
   m_Layer: 5
   m_Name: p2L
   m_TagString: Untagged
@@ -3824,6 +3954,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1189060042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1189060037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!4 &1194434494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 49ea636f7e8fe0746aae5b5dec7592b9,
@@ -4083,6 +4227,7 @@ GameObject:
   - component: {fileID: 1392434062}
   - component: {fileID: 1392434061}
   - component: {fileID: 1392434063}
+  - component: {fileID: 1392434064}
   m_Layer: 5
   m_Name: P1D
   m_TagString: Untagged
@@ -4178,6 +4323,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1392434064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1392434059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1396956521
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,6 +4951,7 @@ GameObject:
   - component: {fileID: 1481361241}
   - component: {fileID: 1481361240}
   - component: {fileID: 1481361242}
+  - component: {fileID: 1481361243}
   m_Layer: 5
   m_Name: p2Charge
   m_TagString: Untagged
@@ -4887,6 +5047,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1481361243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1481361238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1486427138
 Prefab:
   m_ObjectHideFlags: 0
@@ -5072,6 +5246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1a67cc01c836041a5062390c47bdcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChangeKeyColor: {r: 1, g: 1, b: 1, a: 0}
   p1lName: {fileID: 886000990}
   p1rName: {fileID: 846556129}
   p1uName: {fileID: 150929074}
@@ -5124,7 +5299,6 @@ MonoBehaviour:
   Options: {fileID: 523365788}
   Credits: {fileID: 111741719}
   ExtraCredits: {fileID: 399219126}
-  InputFixer: {fileID: 0}
   sScore: {fileID: 1291582632}
   sTime: {fileID: 1563080036}
   cPlatforms: {fileID: 2045728338}
@@ -5782,7 +5956,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 2
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -6036,6 +6210,7 @@ GameObject:
   - component: {fileID: 2089726909}
   - component: {fileID: 2089726908}
   - component: {fileID: 2089726910}
+  - component: {fileID: 2089726911}
   m_Layer: 5
   m_Name: p2U
   m_TagString: Untagged
@@ -6131,6 +6306,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &2089726911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2089726906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2131604634
 GameObject:
   m_ObjectHideFlags: 0
