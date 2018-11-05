@@ -159,7 +159,7 @@ public class InputFixerController : MonoBehaviour {
         if (keyCode.Equals(KeyCode.DownArrow)) s = "↓";
         if (keyCode.Equals(KeyCode.LeftArrow)) s = "←";
         if (keyCode.Equals(KeyCode.RightArrow)) s = "→";
-        if (keyCode.Equals(KeyCode.Space)) s = "__";
+        if (keyCode.Equals(KeyCode.Space)) s = "space";
         if (keyCode.Equals(KeyCode.Delete)) s = "del";
         WriteText(text, s);
         DisplayPressedKey(text, keyCode);
