@@ -59,7 +59,7 @@ public class InputController : MonoBehaviour {
         //exit game (press escape)
         if (Input.GetKeyDown(KeyCode.Escape)) //TODO note: the key is hard-coded
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("StartMenu");
         }
     }
 

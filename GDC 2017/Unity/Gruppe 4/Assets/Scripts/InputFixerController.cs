@@ -51,6 +51,8 @@ public class InputFixerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        InputManager.Load();
+
         dataPairs[0] = new DataPair("Player 1", "Horizontal", true, p1rName);
         dataPairs[1] = new DataPair("Player 1", "Horizontal", false, p1lName);
         dataPairs[2] = new DataPair("Player 1", "Vertical", true, p1uName);
@@ -72,6 +74,8 @@ public class InputFixerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Debug.Log(InputManager.GetAxisRaw("Horizontal"));
+
+
 
         //extract all key bindings
         dataPairs[0] = new DataPair("Player 1", "Horizontal", true, p1rName);
@@ -128,6 +132,8 @@ public class InputFixerController : MonoBehaviour {
                     //your code here
                     if(dp.positive) inputAction.Bindings[0].Positive = vKey;
                     else inputAction.Bindings[0].Negative = vKey;
+
+                    InputManager.Save();
 
                     text.color = new Color(0f, 0f, 0f);
                 }
