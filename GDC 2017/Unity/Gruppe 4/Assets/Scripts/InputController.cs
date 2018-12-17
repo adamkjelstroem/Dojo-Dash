@@ -102,7 +102,8 @@ public class InputController : MonoBehaviour {
     {
         PlayerID player = Player == 1 ? PlayerID.One : PlayerID.Two;
 
-        Vector2 dir = new Vector2(InputManager.GetAxisRaw("Horizontal", player), InputManager.GetAxisRaw("Vertical", player));
+        Vector2 dir = new Vector2(InputManager.GetAxis("Horizontal", player), InputManager.GetAxis("Vertical", player));
+        Debug.Log(dir);
 
         if (dir.x < joystickSensitivity && dir.x > joystickSensitivity)
             dir.x = 0;

@@ -85,7 +85,7 @@ public class ChargeUp : MonoBehaviour
                 //Opdatere timing
                 TimeSinceLastDrum = Time.time;
                 //Debug
-                print("Played Sound, Time since Last drum " + Mathf.Lerp(MinimumSpeed, MaximumSpeed, chargeAmount));
+                //print("Played Sound, Time since Last drum " + Mathf.Lerp(MinimumSpeed, MaximumSpeed, chargeAmount));
                 //skifter hvilken lyd der skal spilles næst
                 MainDrum = !MainDrum;
             }
