@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Luminosity.IO;
+using XInputDotNetPure;
 
 public class ControllsViewer : MonoBehaviour {
 
@@ -22,11 +23,14 @@ public class ControllsViewer : MonoBehaviour {
     public GameObject P2;
 
 
-    private void Start()
+    private void FixedUpdate()
     {
+        GamePadState padOne = GamePad.GetState(PlayerIndex.One);
+        GamePadState padTwo = GamePad.GetState(PlayerIndex.Two);
+
         Debug.LogWarning("Still need to see if controller is connected");
-        bool keyboardOne = true;
-        bool keyboardTwo = true;
+        bool keyboardOne = !padOne.IsConnected;
+        bool keyboardTwo = !padTwo.IsConnected;
 
         Hint.SetActive(keyboardOne || keyboardTwo);
         ShowPlayerOne(keyboardOne);
