@@ -73,7 +73,7 @@ public class InputFixerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(InputManager.GetAxisRaw("Horizontal"));
+        Debug.Log(InputManager.GetAxis("Horizontal", PlayerID.One));
 
 
 
