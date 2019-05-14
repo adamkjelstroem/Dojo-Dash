@@ -2,56 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Input;
+using static PlayerControls;
 
-public class InputController : MonoBehaviour {
+public class InputController : MonoBehaviour, IPlayer1Actions, IPlayer2Actions {
 
-    //joystick movements below this threshold are ignored
-    float joystickSensitivity = 0.5f;
+    [SerializeField] private PlayerControls playerControls;
 
-    /// <summary>
-    /// Contains the keys for the controls of a player(and whether it's a bot, a local player or an internet player)
-    /// </summary>
-    private class PlayerConfig
+    private void Awake()
     {
-        public int type; //human=0, bot=1, internet player=2
-        public string
-            joystickChargeDash,
-            chargeDash,
-
-            joystickHorizontal,
-            joystickVertical,
-            horizontal,
-            vertical;
-
-        public PlayerConfig(int type,
-            string joystickChargeDash,
-            string chargeDash,
-            string joystickHorizontal,
-            string joystickVertical,
-            string horizontal,
-            string vertical)
-        {
-            this.type = type;
-            this.joystickChargeDash = joystickChargeDash;
-            this.chargeDash = chargeDash;
-            this.joystickHorizontal = joystickHorizontal;
-            this.joystickVertical = joystickVertical;
-            this.horizontal = horizontal;
-            this.vertical = vertical;
-        }
+        playerControls.Player1.SetCallbacks(this);
     }
 
-    private PlayerConfig[] players =
+    private void OnEnable()
     {
-        //player 1
-        new PlayerConfig(0,"JoystickChargeDashP1","ChargeDashP1","JoystickHorizontalP1","JoystickVerticalP1","HorizontalP1","VerticalP1"),
-        //player 2
-        new PlayerConfig(0,"JoystickChargeDashP2","ChargeDashP2","JoystickHorizontalP2","JoystickVerticalP2","HorizontalP2","VerticalP2"),
-    };
+        playerControls.Enable();
+    }
 
-    //=====================================================================
-    // Others
-    //=====================================================================
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
 
     private void Update()
     {
@@ -62,120 +33,94 @@ public class InputController : MonoBehaviour {
         }
     }
 
-    //=====================================================================
-    // Local player
-    //=====================================================================
-
-    
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="Player">p1=1,p2=2</param>
-    /// <returns>whether a given player is charging.</returns>
-    public bool IsPlayerCharging(int Player)
-    {
-        PlayerConfig p = players[Player - 1];
-        if ((Player == 1 && Input.GetJoystickNames().Length >= 1) || (Player == 2 && Input.GetJoystickNames().Length >= 2))
-        {
-            // We have a controller.
-            return Input.GetButton(p.joystickChargeDash);
-        }
-        else
-        {
-            //We have no controller.
-            return Input.GetAxis(p.chargeDash) == 1;
-        }
-    }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="Player">p1=1,p2=2</param>
-    /// <returns>the direction a given player is aiming in</returns>
-    public Vector2 PlayerDir(int Player)
-    {
-        PlayerConfig p = players[Player - 1];
-        if ((Player == 1 && Input.GetJoystickNames().Length >= 1) || (Player == 2 && Input.GetJoystickNames().Length >= 2))
-        {
-            // We have a controller.
-            if (Mathf.Abs(Input.GetAxis(p.joystickHorizontal)) <= joystickSensitivity && Mathf.Abs(Input.GetAxis(p.joystickVertical)) <= joystickSensitivity)
-            {
-                return new Vector2(0, 0); //minor joystick movements are ignored
-            }
-
-            Vector2 dir = new Vector2(Input.GetAxis(p.joystickHorizontal), Input.GetAxis(p.joystickVertical));
-            return dir;
-        }
-
-        // We have no controller.
-        return new Vector2((int)Mathf.Round(Input.GetAxis(p.horizontal)), (int)Mathf.Round(Input.GetAxis(p.vertical)));
-    }
-
     //player 1
+    private Vector2 dirP1 = Vector2.zero;
+    private bool isChargingP1;
+
     public bool IsPlayer1Charging()
     {
-        return IsPlayerCharging(1);
+        return isChargingP1;
     }
 
     public Vector2 Player1Dir()
     {
-        return PlayerDir(1);
+        return dirP1;
+    }
+
+    public void OnMovementP1(InputAction.CallbackContext context)
+    {
+        dirP1 = context.ReadValue<Vector2>();
+    }
+
+    public void OnDashChargeP1(InputAction.CallbackContext context)
+    {
+        isChargingP1 = context.ReadValue<bool>();
     }
 
     //player 2
+    private Vector2 dirP2 = Vector2.zero;
+    private bool isChargingP2;
+
     public bool IsPlayer2Charging()
     {
-        return IsPlayerCharging(2);
+        return isChargingP2;
     }
 
     public Vector2 Player2Dir()
     {
-        return PlayerDir(2);
+        return dirP2;
     }
 
+    public void OnMovementP2(InputAction.CallbackContext context)
+    {
+        dirP2 = context.ReadValue<Vector2>();
+    }
+
+    public void OnDashChargeP2(InputAction.CallbackContext context)
+    {
+        isChargingP2 = context.ReadValue<bool>();
+    }
+}
 
 
 
-    //=====================================================================
-    // AI
-    //=====================================================================
+//=====================================================================
+// AI
+//=====================================================================
 
-    /*
+/*
 double tC = -1;
 public bool IsPlayer2Charging()
 {
-    if (tC == -1) tC = Time.time;
+if (tC == -1) tC = Time.time;
 
-    if(tC <= Time.time-0.9)
-    {
-        tC = Time.time;
-        return false;
-    }
-    return true;
+if(tC <= Time.time-0.9)
+{
+    tC = Time.time;
+    return false;
+}
+return true;
 
 }
 
 public Vector2 Player2Dir()
 {
 
-    ///TODO use code from player 1 to handle control on p2 eventuially
+///TODO use code from player 1 to handle control on p2 eventuially
 
-    //TODO generate x and y direction based on opponent's location
+//TODO generate x and y direction based on opponent's location
 
-    GameObject human = GameObject.Find("PlayerOne"); //the human player
-    GameObject bot = GameObject.Find("PlayerTwo"); //the bot
+GameObject human = GameObject.Find("PlayerOne"); //the human player
+GameObject bot = GameObject.Find("PlayerTwo"); //the bot
 
-    float dX = human.transform.position.x - bot.transform.position.x;
-    float dY = human.transform.position.y - bot.transform.position.y;
-    float angle = Mathf.Atan2(dY, dX);
+float dX = human.transform.position.x - bot.transform.position.x;
+float dY = human.transform.position.y - bot.transform.position.y;
+float angle = Mathf.Atan2(dY, dX);
 
 
 
-    //print("" + dX + ", " + dY + " " + angle + " " + Mathf.Cos(angle) + ", " + Mathf.Sin(angle));
-    return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+//print("" + dX + ", " + dY + " " + angle + " " + Mathf.Cos(angle) + ", " + Mathf.Sin(angle));
+return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
 }
 
 */
-
-}
