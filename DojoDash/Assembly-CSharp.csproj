@@ -63,35 +63,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\IntroScene\NextSceneScript.cs" />
+    <Compile Include="Assets\Scenes\StartScene\Scripts\AnimationControllerStartScene.cs" />
+    <Compile Include="Assets\Scenes\StartScene\Scripts\AudioController.cs" />
+    <Compile Include="Assets\Scenes\StartScene\Scripts\ButtonController.cs" />
+    <Compile Include="Assets\Scenes\StartScene\Scripts\KunaiHits.cs" />
+    <Compile Include="Assets\Scenes\StartScene\Scripts\ShurikenHit.cs" />
+    <Compile Include="Assets\Scenes\VictoryScene\Scripts\WinnerScreenControlller.cs" />
     <Compile Include="Assets\Scripts\Ambience.cs" />
-    <Compile Include="Assets\Scripts\ControllsViewer.cs" />
     <Compile Include="Assets\Scripts\GlobalVariables.cs" />
-    <Compile Include="Assets\Scripts\InputController.cs" />
-    <Compile Include="Assets\Scripts\InputFixerController.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\NameDisplay.cs" />
     <Compile Include="Assets\Scripts\NoPlatforms.cs" />
     <Compile Include="Assets\Scripts\OutOfScreenMarkers.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\AnimationController.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\ChargeUp.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\EnergyBar.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\FillArrow.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\MinEnergy.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\PlayerAim.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\PlayerBehaviour.cs" />
-    <Compile Include="Assets\Scripts\PlayerBehaviour\PlayerSounds.cs" />
+    <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\Player\ChargeUp.cs" />
+    <Compile Include="Assets\Scripts\Player\ControllsViewer.cs" />
+    <Compile Include="Assets\Scripts\Player\EnergyBar.cs" />
+    <Compile Include="Assets\Scripts\Player\FillArrow.cs" />
+    <Compile Include="Assets\Scripts\Player\InputController.cs" />
+    <Compile Include="Assets\Scripts\Player\InputFixerController.cs" />
+    <Compile Include="Assets\Scripts\Player\MinEnergy.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAim.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerSounds.cs" />
+    <Compile Include="Assets\Scripts\Player\SmokeController.cs" />
     <Compile Include="Assets\Scripts\PlayerIcon.cs" />
     <Compile Include="Assets\Scripts\ScoreDisplay.cs" />
-    <Compile Include="Assets\Scripts\SmokeController.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\Tools\ToolDontDestroyOnLoad.cs" />
     <Compile Include="Assets\Scripts\Tools\UiPlacer.cs" />
-    <Compile Include="Assets\StartScene\Scripts\AnimationControllerStartScene.cs" />
-    <Compile Include="Assets\StartScene\Scripts\AudioController.cs" />
-    <Compile Include="Assets\StartScene\Scripts\ButtonController.cs" />
-    <Compile Include="Assets\StartScene\Scripts\KunaiHits.cs" />
-    <Compile Include="Assets\StartScene\Scripts\ShurikenHit.cs" />
-    <Compile Include="Assets\VictoryScene\Scripts\WinnerScreenControlller.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Windows/Documents/GitHub/Dojo-Dash/DojoDash/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
