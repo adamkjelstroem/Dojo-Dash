@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Input\PlayerControls.cs" />
     <Compile Include="Assets\IntroScene\NextSceneScript.cs" />
     <Compile Include="Assets\Scripts\Ambience.cs" />
     <Compile Include="Assets\Scripts\ControllsViewer.cs" />
@@ -95,9 +94,6 @@
     <Compile Include="Assets\VictoryScene\Scripts\WinnerScreenControlller.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Windows/Documents/GitHub/Dojo-Dash/DojoDash/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>D:/Windows/Documents/GitHub/Dojo-Dash/DojoDash/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Windows/Documents/GitHub/Dojo-Dash/DojoDash/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
